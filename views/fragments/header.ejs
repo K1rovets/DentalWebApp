@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" /> <!-- NEW STAFF FOR MOBILE VIEW-->
+    <title> Ademi Dental Clinic </title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="application/javascript" src="/js/validationCommon.js"></script>
+</head>
+
+<% if(!loggedUser) { %>
+    <div id = "login">
+        <h5>Login</h5>
+        <form method="post" action="/login" novalidate>
+            <label for="loginEmail">Email:</label>
+            <input type="email" id="loginEmail" name="email">
+
+            <label for="loginPassword"><%= __('login.password') %>:</label>
+            <input type="password" id="loginPassword" name="password">
+            <input type="submit" value="<%= __('login.submit.value') %>">
+            <span id="loginErrors"><%= loginError ? loginError : ''%></span>
+        </form>
+    </div>
+<% } else { %>
+    <span> <%= __('login.loggedIn') %> <%= loggedUser.role == 'admin' ? " ADMIN: " : ": " %> <%= loggedUser.firstName + " " + loggedUser.lastName%></span>
+    <a href="/logout"><%= __('login.logout') %></a>
+<% } %> 
+
+<body>
+    <header>
+        <h1>"Ademi" Dental Clinic</h1>
+        <img src="/images/dental_logo.png" alt="Ademi Clinic Logo" width="100" height="100">
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="/" class="<%= navLocation == `main` ? `active` : `` %>"><%= __('nav.main-page') %></a></li>
+            <% if(loggedUser) { %>
+                <li><a href="/patient" class="<%= navLocation == `patient` ? `active` : `` %>"><%= __('nav.patient') %></a></li>
+                <li><a href="/appointment" class="<%= navLocation == `appointment` ? `active` : `` %>"><%= __('nav.appoinment') %></a></li>
+                <li><a href="/procedure" class="<%= navLocation == `procedure` ? `active` : `` %>"><%= __('nav.procedure') %></a></li>
+            <% } %>
+        </ul>
+        <ul>
+            <li><a href="/changeLang/pl" class="<%= lang == 'pl' ? 'active' : ''%>">PL</a></li>
+            <li><a href="/changeLang/en" class="<%= lang == 'en' ? 'active' : ''%>">EN</a></li>
+        </ul>
+    </nav>

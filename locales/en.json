@@ -1,0 +1,176 @@
+{
+	"main-page": {
+		"title": "Main page"
+	},
+	"login": {
+		"password": "Password",
+		"submit": {
+			"value": "Sign in"
+		},
+		"loggedIn": "You are logged in as",
+		"logout": "Sign out"
+	},
+	"nav": {
+		"main-page": "Main page",
+		"patient": "Patient",
+		"appoinment": "Appointment",
+		"procedure": "Procedure"
+	},
+	"list": {
+		"actions": {
+			"title": "Actions",
+			"details": "Details",
+			"edit": "Edit",
+			"delete": "Delete"
+		}
+	},
+	"form": {
+		"actions": {
+			"edit": "Edit",
+			"cancel": "Cancel",
+			"return": "Return"
+		}
+	},
+	"validationMessage": {
+		"fieldRequired": "The field is required.",
+		"field2_60char": "The field should contain 2 to 60 characters",
+		"field7_11char": "The field should contain 7 to 11 characters.",
+		"fieldValidInsurance": "The field should contain a valid insurance number.",
+		"fieldNoSignInsurance": "The field should not contain any signs.",
+		"field9_12char": "The field should contain 9 to 12 characters.",
+		"fieldValidPhone": "The field should contain a valid phone number.",
+		"field5_60char": "The field should contain 5 to 60 characters.",
+		"fieldValidEmail": "The field should contain a valid email address.",
+		"field4_16char": "The password should contain 4 to 16 characters.",
+		"field10_60char": "The field should contain 10 to 60 characters.",
+		"fieldPriceFrom": "The price must be between 100 - 30000 PLN.",
+		"fieldValidNumber": "The field should contain number.",
+		"fieldPriceTo": "The Max Price must be bigger than Min Price",
+		"fieldValidDate": "The field should contain the date in the yyyy-MM-dd hh:mm format (e.g. 2000-01-01 10:00).",
+		"fieldValidHours": "The field should contain working hours between 8:30 - 20:00.",
+		"fieldValidPrice": "The price must be between 100 - 33000.",
+		"fieldValidRoom": "The room number must be valid (1-7).",
+		"fieldSummary": "Form contains errors"
+	},
+	"joiError": {
+		"fieldRequiredCheck": "The field is required.",
+		"fieldLeastCharCheck": "The field should contain more characters.",
+		"fieldMostCharCheck": "The field should contain fewer characters.",
+		"fieldEmailCheck": "The field should contain a valid email address.",
+		"fieldNameCheck": "The field should contain a valid input.",
+		"fieldPriceCheck": "The field should contain a price in PLN.",
+		"fieldMinPriceCheck": "The field should contain a bigger price in PLN.",
+		"fieldMaxPriceCheck": "The field should contain a smaller price in PLN.",
+		"fieldGreaterPriceCheck": "The field should contain price greater than minimal.",
+		"fieldLesserPriceCheck": "The field should contain price greater than minimal.",
+		"fieldRoomCheck": "The field should contain a valid room number (1 - 7).",
+		"fieldDateCheck": "The field should contain the date in the yyyy-MM-dd hh:mm format (e.g. 2000-01-01 10:00)."
+	},
+	"placeholder": {
+		"charLimit": "2-60 characters",
+		"passCharLimit": "4-16 characters",
+		"enterNewPass": "Enter new password"
+	},
+	"selectValue": {
+		"optionDefault": "Choose option",
+		"optionYes": "Yes",
+		"optionNo": "No",
+		"optionPatient": "Choose patient",
+		"optionProc": "Choose procedure"
+	},
+	"patient": {
+		"list": {
+			"title": "Patient List",
+			"pageTitle": "List of patients",
+			"addNew": "Add new patient"
+		},
+		"fields": {
+			"firstName": "First name",
+			"lastName": "Last name",
+			"insurance": "Insurance",
+			"phone": "Phone",
+			"email": "Email",
+			"password": "Password"
+		},
+		"form": {
+			"details": {
+				"tableName": "Appointment details",
+				"tableHead1": "Name of the Procedure",
+				"tableHead2": "Date and Time",
+				"tableHead3": "Final Price (PLN)",
+				"tableHead4": "Room",
+				"tableHead5": "Comment",
+				"pageTitle": "Patient's details"
+			},
+			"add": {
+				"pageTitle": "Adding a new patient",
+				"btnLabel": "Add new patient"
+			},
+			"edit": {
+				"pageTitle": "Editing patient data",
+				"btnLabel": "Save changes"
+			}
+		}
+	},
+	"procedure": {
+		"list": {
+			"title": "Procedures",
+			"pageTitle": "List of Procedures",
+			"addNew": "Add new procedure"
+		},
+		"fields": {
+			"name": "Name",
+			"coverage": "Insurance coverage",
+			"minPrice": "Min Price (PLN)",
+			"maxPrice": "Max Price (PLN)"
+		},
+		"form": {
+			"details": {
+				"tableName": "Procedure details",
+				"tableHead1": "Name of the Patient",
+				"tableHead2": "Date and Time",
+				"tableHead3": "Final Price (PLN)",
+				"tableHead4": "Room",
+				"tableHead5": "Comment",
+				"pageTitle": "Procedure's details"
+			},
+			"add": {
+				"pageTitle": "Adding a new procedure",
+				"btnLabel": "Add procedure"
+			},
+			"edit": {
+				"pageTitle": "Editing procedure",
+				"btnLabel": "Save changes"
+			}
+		}
+	},
+	"appointment": {
+		"list": {
+			"title": "Appointments",
+			"pageTitle": "List of Appointments",
+			"addNew": "Add new appointment"
+		},
+		"fields": {
+			"patient": "Patient",
+			"procedure": "Procedure",
+			"date": "Date",
+			"price": "Price (PLN)",
+			"room": "Room",
+			"comment": "Comment"
+		},
+		"form": {
+			"details": {
+				"pageTitle": "Appointment's details"
+			},
+			"add": {
+				"pageTitle": "Adding a new appointment",
+				"btnLabel": "Add appointment"
+			},
+			"edit": {
+				"pageTitle": "Editing appointment",
+				"btnLabel": "Save changes"
+			}
+		}
+	},
+	"fieldRequiredCheck": "fieldRequiredCheck"
+}

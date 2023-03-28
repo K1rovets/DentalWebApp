@@ -1,0 +1,174 @@
+<%- include(`../../fragments/header.ejs`) %>
+
+    <main>
+        <script type="application/javascript" src="/js/validationPatientForm.js"></script>
+        <h2><%= pageTitle %></h2>
+        <form class="form" method="post" action="<%=formAction%>" novalidate onsubmit="return validateForm()">
+            <!-- Hidden field -->
+            <input type="text" name="idPatient" value="<%= patient.idPatient %>">
+
+            <!-- FirstName -->
+            <label for="firstName"><%= __('patient.fields.firstName') %>: <span class="symbol-required">*</span></label>
+            <input 
+                type="text" name="firstName" id="firstName" placeholder="<%= __('placeholder.charLimit') %>"
+                value="<%= patient.firstName %>"
+                class="<%= validationErrors.find(err => err.path.includes('firstName')) ? 'error-input' : '' %>"
+                <%=(formMode=='showDetails' ) ? 'disabled' : '' %> required>
+            <span id="errorFirstName" class="errors-text">
+                <% if (validationErrors.find(e=> e.path.includes('firstName'))) { %>
+                    <%= __(validationErrors.find(e=> e.path.includes('firstName')).message) %>
+                <% } %>
+            </span>
+            <div style="display: none">
+                <span id="fieldRequired"><%= __('validationMessage.fieldRequired') %></span>
+                <span id="field2_60char"><%= __('validationMessage.field2_60char') %></span>
+            </div>             
+
+            <!-- LastName -->
+            <label for="lastName"><%= __('patient.fields.lastName') %>: <span class="symbol-required">*</span></label>
+            <input 
+                type="text" name="lastName" id="lastName" placeholder="<%= __('placeholder.charLimit') %>"
+                value="<%= patient.lastName %>"
+                class="<%= validationErrors.find(err => err.path.includes('lastName')) ? 'error-input' : '' %>"
+                <%=(formMode=='showDetails' ) ? 'disabled' : '' %> required>
+            <span id="errorSurname" class="errors-text">
+                <% if (validationErrors.find(e=> e.path.includes('lastName'))) { %>
+                    <%= __(validationErrors.find(e=> e.path.includes('lastName')).message) %>
+                <% } %>
+            </span>
+            <div style="display: none">
+                <span id="fieldRequired"><%= __('validationMessage.fieldRequired') %></span>
+                <span id="field2_60char"><%= __('validationMessage.field2_60char') %></span>
+            </div>
+
+            <!-- Insurance-->
+            <label for="insurance"><%= __('patient.fields.insurance') %>: <span class="symbol-required">*</span></label>
+            <input 
+                type="text" name="insurance" id="insurance" 
+                value="<%= patient.insurance %>"
+                class="<%= validationErrors.find(err => err.path.includes('insurance')) ? 'error-input' : '' %>"
+                <%=(formMode=='showDetails' ) ? 'disabled' : '' %> required>
+            <span id="errorInsurance" class="errors-text">
+                <% if (validationErrors.find(e=> e.path.includes('insurance'))) { %>
+                    <%= __(validationErrors.find(e=> e.path.includes('insurance')).message) %>
+                <% } %>
+            </span>
+            <div style="display: none">
+                <span id="fieldRequired"><%= __('validationMessage.fieldRequired') %></span>
+                <span id="field7_11char"><%= __('validationMessage.field7_11char') %></span>
+                <span id="fieldValidInsurance"><%= __('validationMessage.fieldValidInsurance') %></span>
+                <span id="fieldNoSignInsurance"><%= __('validationMessage.fieldNoSignInsurance') %></span>                
+            </div>
+
+            <!-- Phone -->
+            <label for="phone"><%= __('patient.fields.phone') %>: <span class="symbol-required">*</span></label>
+            <input 
+                type="tel" name="phone" id="phone" 
+                value="<%= patient.phone %>"
+                class="<%= validationErrors.find(err => err.path.includes('phone')) ? 'error-input' : '' %>"
+                <%=(formMode=='showDetails' ) ? 'disabled' : '' %> required>
+            <span id="errorPhone" class="errors-text">
+                <% if (validationErrors.find(e=> e.path.includes('phone'))) { %>
+                    <%= __(validationErrors.find(e=> e.path.includes('phone')).message) %>
+                <% } %>
+            </span>
+            <div style="display: none">
+                <span id="fieldRequired"><%= __('validationMessage.fieldRequired') %></span>
+                <span id="field9_12char"><%= __('validationMessage.field9_12char') %></span>
+                <span id="fieldValidPhone"><%= __('validationMessage.fieldValidPhone') %></span>              
+            </div>
+
+            <!-- Email -->
+            <label for="email"><%= __('patient.fields.email') %>: <span class="symbol-required">*</span></label>
+            <input 
+                type="email" name="email" id="email" value="<%= patient.email %>"
+                class="<%= validationErrors.find(err => err.path.includes('email')) ? 'error-input' : '' %>"
+                <%=(formMode=='showDetails' ) ? 'disabled' : '' %>>
+            <span id="errorEmail" class="errors-text">
+                <% if (validationErrors.find(e=> e.path.includes('email'))) { %>
+                    <%= __(validationErrors.find(e=> e.path.includes('email')).message) %>
+                <% } %>
+            </span>
+            <div style="display: none">
+                <span id="fieldRequired"><%= __('validationMessage.fieldRequired') %></span>
+                <span id="field5_60char"><%= __('validationMessage.field5_60char') %></span>
+                <span id="fieldValidEmail"><%= __('validationMessage.fieldValidEmail') %></span>              
+            </div>
+
+            <% if (formMode=='createNew' || formMode=='edit') { %>
+                <!-- Password -->
+                <label for="password"><%= __('patient.fields.password') %>: <span class="symbol-required">*</span></label>
+                <input 
+                    type="text" name="password" id="password" placeholder="<%= formMode=='createNew' ? __('placeholder.passCharLimit') : __('placeholder.passCharLimit') %>" value="<%= patient.password %>"
+                    class="<%= validationErrors.find(err => err.path.includes('password')) ? 'error-input' : '' %>"
+                    <%=(formMode=='showDetails' ) ? 'disabled' : '' %>>
+                <span id="errorPassword" class="errors-text">
+                    <% if (validationErrors.find(e=> e.path.includes('password'))) { %>
+                        <%= __(validationErrors.find(e=> e.path.includes('password')).message) %>
+                    <% } %>
+                </span>
+                <div style="display: none">
+                    <span id="fieldRequired"><%= __('validationMessage.fieldRequired') %></span>
+                    <span id="field4_16char"><%= __('validationMessage.field4_16char') %></span>            
+                </div>
+            <% } %> 
+
+            <!-- Buttons -->
+            <% if (formMode=='showDetails' && (loggedUser.role === "admin" || loggedUser.idPatient === patient.idPatient) ) { %>
+                <div>
+                    <a href="/patient/edit/<%= patient.idPatient %>" class="button-edit"><%= __('form.actions.edit') %></a>
+                </div>
+            <% } %>
+
+            <div class="form-buttons">
+                <p id="errorsSummary" class="errors-text"></p>
+                <div style="display: none">
+                    <span id="fieldSummary"><%= __('validationMessage.fieldSummary') %></span>          
+                </div>
+                <% if (formMode !='showDetails' ) { %>
+                    <input type="submit" class="form-button-submit" value="<%= btnLabel %>">
+                    <a href="/patient" class="form-button-cancel"><%= __('form.actions.cancel') %></a>
+                <% } else { %>
+                    <a href="/patient" class="form-button-cancel"><%= __('form.actions.return') %></a>
+                <% } %>
+            </div>
+        </form>
+
+        <% if (formMode=='showDetails' ) { %>
+            <h2><%= __('patient.form.details.tableName') %></h2>
+            <table class="table-list">
+                <thead>
+                    <tr>
+                        <th><%= __('patient.form.details.tableHead1') %></th>
+                        <th><%= __('patient.form.details.tableHead2') %></th>
+                        <th class="table-hide-1"><%= __('patient.form.details.tableHead3') %></th>
+                        <th class="table-hide-1"><%= __('patient.form.details.tableHead4') %></th>
+                        <th class="table-hide-1"><%= __('patient.form.details.tableHead5') %></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for (let appointment of patient.appointments) { %>
+                        <tr>
+                            <td><a href="/procedure/details/<%= appointment.procedureOper.idProcedure %> ">
+                                    <%= appointment.procedureOper.procName %>
+                                </a></td>
+                            <td>
+                                <%= appointment.date.toLocaleString() %>
+                            </td>
+                            <td>
+                                <%= appointment.price %>
+                            </td>
+                            <td>
+                                <%= appointment.room %>
+                            </td>
+                            <td>
+                                <%= appointment.comment %>
+                            </td>
+                        </tr>
+                        <% } %>
+                </tbody>
+            </table>
+        <% } %>
+    </main>
+
+    <%- include(`../../fragments/footer.ejs`) %>

@@ -1,0 +1,139 @@
+<%- include(`../../fragments/header.ejs`) %>
+
+    <main>
+        <script type="application/javascript" src="/js/validationProcedureForm.js"></script>
+        <h2><%= pageTitle %></h2>
+        <form class="form" method="post" action="<%=formAction%>" novalidate onsubmit="return validateForm()">
+            <!-- Hidden field -->
+            <input type="hidden" name="idProcedure" value="<%= procedure.idProcedure %>">
+
+            <!-- Procedure -->
+            <label for="procName"><%= __('procedure.fields.name') %>: <span class="symbol-required">*</span></label>
+            <input 
+                type="text" name="procName" id="procName" 
+                value="<%= procedure.procName %>"
+                class="<%= validationErrors.find(err => err.path.includes('procName')) ? 'error-input' : '' %>"
+                <%=(formMode=='showDetails' ) ? 'disabled' : '' %> required>
+            <span id="errorProcedureName" class="errors-text">
+                <% if (validationErrors.find(e=> e.path.includes('procName'))) { %>
+                    <%= __(validationErrors.find(e=> e.path.includes('procName')).message) %>
+                <% } %>
+            </span>
+            <div style="display: none">
+                <span id="fieldRequired"><%= __('validationMessage.fieldRequired') %></span>
+                <span id="field10_60char"><%= __('validationMessage.field10_60char') %></span>
+            </div>   
+
+            <!-- Coverage -->
+            <label for="inCoverage"><%= __('procedure.fields.coverage') %>: <span class="symbol-required">*</span></label>
+            <select 
+                name="inCoverage" id="inCoverage"
+                class="<%= validationErrors.find(err => err.path.includes('coverage')) ? 'error-input' : '' %>"
+                <%=(formMode=='showDetails' ) ? 'disabled' : '' %> required>
+                    <option value="" disabled <%=(procedure.inCoverage==null) ? 'selected' : '' %>>-- <%= __('selectValue.optionProc') %> --</option>
+                    <option value="Yes" <%=(procedure.inCoverage=='Yes' ) ? 'selected' : '' %>><%= __('selectValue.optionYes') %></option>
+                    <option value="No" <%=(procedure.inCoverage=='No' ) ? 'selected' : '' %>><%= __('selectValue.optionNo') %></option>
+            </select>
+            <span id="errorCoverage" class="errors-text">
+                <% if (validationErrors.find(e=> e.path.includes('coverage'))) { %>
+                    <%= __(validationErrors.find(e=> e.path.includes('coverage')).message) %>
+                <% } %>
+            </span>
+            <div style="display: none">
+                <span id="fieldRequired"><%= __('validationMessage.fieldRequired') %></span>
+            </div>  
+
+            <!-- Price from -->
+            <label for="priceFrom"><%= __('procedure.fields.minPrice') %>: <span class="symbol-required">*</span></label>
+            <input 
+                type="number" name="priceFrom" id="priceFrom" min="100" max="30000"
+                class="<%= validationErrors.find(err => err.path.includes('priceFrom')) ? 'error-input' : '' %>"
+                value="<%= procedure.priceFrom %>" <%=(formMode=='showDetails' ) ? 'disabled' : '' %> required>
+            <span id="errorPriceFrom" class="errors-text">
+                <% if (validationErrors.find(e=> e.path.includes('priceFrom'))) { %>
+                    <%= __(validationErrors.find(e=> e.path.includes('priceFrom')).message) %>
+                <% } %>
+            </span>
+            <div style="display: none">
+                <span id="fieldRequired"><%= __('validationMessage.fieldRequired') %></span>
+                <span id="fieldPriceFrom"><%= __('validationMessage.fieldPriceFrom') %></span>
+            </div>   
+
+            <!-- Price to -->
+            <label for="priceTo"><%= __('procedure.fields.maxPrice') %>: </label>
+            <input 
+                type="number" name="priceTo" id="priceTo" min="101" max="30000" 
+                value="<%= procedure.priceTo%>"
+                class="<%= validationErrors.find(err => err.path.includes('priceTo')) ? 'error-input' : '' %>"
+                <%=(formMode=='showDetails' ) ? 'disabled' : '' %>>
+            <span id="errorPriceTo" class="errors-text">
+                <% if (validationErrors.find(e=> e.path.includes('priceTo'))) { %>
+                    <%= __(validationErrors.find(e=> e.path.includes('priceTo')).message) %>
+                <% } %>
+            </span>
+            <div style="display: none">
+                <span id="fieldValidNumber"><%= __('validationMessage.fieldValidNumber') %></span>
+                <span id="fieldPriceTo"><%= __('validationMessage.fieldPriceTo') %></span>
+            </div>   
+
+            <!-- Buttons -->
+            <% if (formMode=='showDetails' && loggedUser.role === "admin") { %>
+                <div>
+                    <a href="/procedure/edit/<%= procedure.idProcedure %>" class="button-edit"><%= __('form.actions.edit') %></a>
+                </div>
+            <% } %>
+
+            <div class="form-buttons">
+                <p id="errorsSummary" class="errors-text"></p>
+                <div style="display: none">
+                    <span id="fieldSummary"><%= __('validationMessage.fieldSummary') %></span>          
+                </div>
+                <% if (formMode !='showDetails' ) { %>
+                    <input type="submit" class="form-button-submit" value="<%= btnLabel %>">
+                    <a href="/procedure" class="form-button-cancel"><%= __('form.actions.cancel') %></a>
+                <% } else { %>
+                    <a href="/procedure" class="form-button-cancel"><%= __('form.actions.return') %></a>
+                <% } %>
+            </div>
+        </form>
+
+        <% if (formMode=='showDetails' ) { %>
+            <h2><%= __('procedure.form.details.tableName') %></h2>
+            <table class="table-list">
+                <thead>
+                    <tr>
+                        <th><%= __('patient.form.details.tableHead1') %></th>
+                        <th><%= __('patient.form.details.tableHead2') %></th>
+                        <th class="table-hide-1"><%= __('patient.form.details.tableHead3') %></th>
+                        <th class="table-hide-1"><%= __('patient.form.details.tableHead4') %></th>
+                        <th class="table-hide-1"><%= __('patient.form.details.tableHead5') %></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for (let appointment of procedure.appointments) { %>
+                        <tr>
+                            <td><a href="/patient/details/<%= appointment.patient.idPatient %> ">
+                                    <%= appointment.patient.firstName %>
+                                        <%= appointment.patient.lastName %>
+                                </a></td>
+                            <td>
+                                <%= appointment.date.toLocaleString() %>
+                            </td>
+                            <td>
+                                <%= appointment.price %>
+                            </td>
+                            <td>
+                                <%= appointment.room %>
+                            </td>
+                            <td>
+                                <%= appointment.comment %>
+                            </td>
+                        </tr>
+                        <% } %>
+                </tbody>
+            </table>
+        <% } %>
+
+    </main>
+
+    <%- include(`../../fragments/footer.ejs`) %>

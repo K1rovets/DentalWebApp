@@ -1,0 +1,156 @@
+<%- include(`../../fragments/header.ejs`) %>
+
+    <main>
+        <script type="application/javascript" src="/js/validationAppoinmentForm.js"></script>
+        <h2><%= pageTitle %></h2>
+        <form class="form" method="post" action="<%= formAction %>" novalidate onsubmit="return validateForm()">
+            <!-- Hidden field -->
+            <input type="hidden" name="idOperation" value="<%= appointment.idOperation %>">
+
+            <!-- Patient fullname selection -->
+            <label for="patientId"><%= __('appointment.fields.patient') %>: <span class="symbol-required">*</span></label>
+            <select 
+                name="patientId"
+                id="patientId" 
+                class="<%= validationErrors.find(err => err.path.includes('patientId')) ? 'error-input' : '' %>" 
+                <%=(formMode=='showDetails' ) ? 'disabled' : '' %> required>
+                    <option value="" disabled selected>-- <%= __('selectValue.optionPatient') %> --</option>
+                    <% for (let i=0; i < allPatients.length; i++) { let patient=allPatients[i]; %>
+                        <option 
+                            value="<%= patient.idPatient%>" 
+                            label="<%= patient.firstName + ' ' + patient.lastName %>"
+                            <%=(appointment.idOperation && patient.idPatient.toString()==appointment.patientId.toString()) ? 'selected' : '' %> >
+                        </option>
+                    <% } %>
+            </select>
+            <span id="errorPatientName" class="errors-text">
+                <% if (validationErrors.find(e=> e.path.includes('patientId'))) { %>
+                    <%= __(validationErrors.find(e=> e.path.includes('patientId')).message) %>
+                <% } %>
+            </span>
+            <div style="display: none">
+                <span id="fieldRequired"><%= __('validationMessage.fieldRequired') %></span>
+            </div> 
+
+            <% if (formMode=='showDetails' ) { %>
+                <!-- Pateint Phone -->
+                <label for="phone"><%= __('patient.fields.phone') %>: <span class="symbol-required">*</span></label>
+                <input type="tel" name="phone" id="phone"
+                    value="<%= allPatients.find(e => e.idPatient == appointment.patientId).phone %>" disabled>
+                <span id="errorPhone" class="errors-text"></span>
+
+                <!-- Email -->
+                <label for="email"><%= __('patient.fields.email') %>: <span class="symbol-required">*</span></label>
+                <input type="email" name="email" id="email"
+                    value="<%= allPatients.find(e => e.idPatient == appointment.patientId).email %>" disabled>
+                <span id="errorEmail" class="errors-text"></span>
+            <% } %>
+
+            <!-- Procedure selection -->
+            <label for="procedureId"><%= __('appointment.fields.procedure') %>: <span class="symbol-required">*</span></label>
+            <select 
+                name="procedureId"
+                id="procedureId" 
+                class="<%= validationErrors.find(err => err.path.includes('procedureId')) ? 'error-input' : '' %>" 
+                <%=(formMode=='showDetails' ) ? 'disabled' : '' %> required>
+                    <option value="" disabled selected>-- <%= __('selectValue.optionProc') %> --</option>
+                    <% for (let i=0; i < allProcedures.length; i++) { let procedure=allProcedures[i]; %>
+                        <option 
+                            value="<%= procedure.idProcedure%>" 
+                            label="<%= procedure.procName %>" 
+                            <%=(appointment.idOperation && procedure.idProcedure.toString()==appointment.procedureId.toString()) ? 'selected' : '' %>>
+                        </option>
+                    <% } %>
+            </select>
+            <span id="errorProcedure" class="errors-text">
+                <% if (validationErrors.find(e=> e.path.includes('procedureId'))) { %>
+                    <%= __(validationErrors.find(e=> e.path.includes('procedureId')).message) %>
+                <% } %>
+            </span>
+            <div style="display: none">
+                <span id="fieldRequired"><%= __('validationMessage.fieldRequired') %></span>
+            </div> 
+
+            <!-- Procedure date -->
+            <label for="date"><%= __('appointment.fields.date') %>: <span class="symbol-required">*</span></label>
+            <input 
+                type="datetime-local" 
+                name="date" id="date" 
+                value="<%= (appointment.date) ? fmt.formatDate(appointment.date) : '' %>" 
+                class="<%= validationErrors.find(err => err.path.includes('date')) ? 'error-input' : '' %>" 
+                <%=(formMode=='showDetails' ) ? 'disabled' : '' %> required>
+            <span id="errorDate" class="errors-text">
+                 <% if (validationErrors.find(e=> e.path.includes('date'))) { %>
+                    <%= __(validationErrors.find(e=> e.path.includes('date')).message) %>
+                <% } %>
+            </span>
+            <div style="display: none">
+                <span id="fieldRequired"><%= __('validationMessage.fieldRequired') %></span>
+                <span id="fieldValidDate"><%= __('validationMessage.fieldValidDate') %></span>
+                <span id="fieldValidHours"><%= __('validationMessage.fieldValidHours') %></span>
+            </div> 
+
+            <!-- Procedute price -->
+            <label for="price"><%= __('appointment.fields.price') %>: <span class="symbol-required">*</span></label>
+            <input 
+                type="number" 
+                name="price" id="price" min="100" max="30_000" 
+                value="<%= appointment.price %>" 
+                class="<%= validationErrors.find(err => err.path.includes('price')) ? 'error-input' : '' %>" 
+                <%=(formMode=='showDetails' ) ? 'disabled' : '' %> required>
+            <span id="errorPrice" class="errors-text">
+                <% if (validationErrors.find(e=> e.path.includes('price'))) { %>
+                    <%= __(validationErrors.find(e=> e.path.includes('price')).message) %>
+                <% } %>
+            </span>
+            <div style="display: none">
+                <span id="fieldRequired"><%= __('validationMessage.fieldRequired') %></span>
+                <span id="fieldValidNumber"><%= __('validationMessage.fieldValidNumber') %></span>
+                <span id="fieldValidPrice"><%= __('validationMessage.fieldValidPrice') %></span>
+            </div> 
+
+            <!-- Room number -->
+            <label for="room"><%= __('appointment.fields.room') %>: <span class="symbol-required">*</span></label>
+            <input 
+                type="number" name="room" id="room" min="1" max="7" 
+                value="<%= appointment.room %>" 
+                class="<%= validationErrors.find(err => err.path.includes('room')) ? 'error-input' : '' %>" 
+                <%=(formMode=='showDetails' ) ? 'disabled' : '' %> required>
+            <span id="errorRoom" class="errors-text">
+                <% if (validationErrors.find(e=> e.path.includes('room'))) { %>
+                    <%= __(validationErrors.find(e=> e.path.includes('room')).message) %>
+                <% } %>
+            </span>
+            <div style="display: none">
+                <span id="fieldRequired"><%= __('validationMessage.fieldRequired') %></span>
+                <span id="fieldValidRoom"><%= __('validationMessage.fieldValidRoom') %></span>
+            </div> 
+
+            <!-- Comment -->
+            <label for="comment"><%= __('appointment.fields.comment') %>: </label>
+            <input type="text" name="comment" id="comment" value="<%= appointment.comment %>" <%=(formMode=='showDetails' ) ? 'disabled' : '' %>>
+            <span id="errorComment"></span>
+
+            <!-- Buttons -->
+            <% if (formMode=='showDetails' && loggedUser.role === "admin") { %>
+                <div>
+                    <a href="/appointment/edit/<%= appointment.idOperation %>" class="button-edit"><%= __('form.actions.edit') %></a>
+                </div>
+            <% } %>
+
+            <div class="form-buttons">
+                <p id="errorsSummary" class="errors-text"></p>
+                <div style="display: none">
+                    <span id="fieldSummary"><%= __('validationMessage.fieldSummary') %></span>          
+                </div>
+                <% if (formMode !='showDetails' ) { %>
+                    <input type="submit" class="form-button-submit" value="<%= btnLabel %> ">
+                    <a href="/appointment" class="form-button-cancel"><%= __('form.actions.cancel') %></a>
+                <% } else { %>
+                    <a href="/appointment" class="form-button-cancel"><%= __('form.actions.return') %></a>
+                <% } %>
+            </div>
+        </form>
+    </main>
+
+    <%- include(`../../fragments/footer.ejs`) %>

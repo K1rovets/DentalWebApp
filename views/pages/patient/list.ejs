@@ -1,0 +1,80 @@
+<%- include(`../../fragments/header.ejs`) %>
+
+    <main>
+        <h2><%= __('patient.list.pageTitle') %></h2>
+        <table class="table-list">
+            <thead>
+                <tr>
+                    <th><%= __('patient.fields.firstName') %></th>
+                    <th><%= __('patient.fields.lastName') %></th>
+                    <th class="table-hide-1"><%= __('patient.fields.insurance') %></th>
+                    <th><%= __('patient.fields.phone') %></th>
+                    <th class="table-hide-1"><%= __('patient.fields.email') %></th>
+                    <th><%= __('list.actions.title') %></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (let patient of patients) { %>
+                    <tr>
+                        <td>
+                            <%= patient.firstName %>
+                        </td>
+                        <td>
+                            <%= patient.lastName %>
+                        </td>
+                        <td class="table-hide-1">
+                            <%= patient.insurance %>
+                        </td>
+                        <td>
+                            <%= patient.phone %>
+                        </td>
+                        <td class="table-hide-1">
+                            <%= patient.email %>
+                        </td>
+                        <td>
+                            <ul class="list-actions">
+                                <% if(loggedUser.role === "admin" || loggedUser.idPatient === patient.idPatient) { %>
+                                <li>
+                                    <!--CHANGE TEMPLATE-->
+                                    <a href="/patient/details/<%= patient.idPatient %>">
+                                        <img src="/images/details_icon.png" alt="Details" width="30" height="30"
+                                            class="list-actions-icon-details">
+                                        <span class="list-actions-button-details"><%= __('list.actions.details') %></span>
+                                    </a>
+                                </li>
+                                <% } %>
+                                
+                                <% if(loggedUser.role === "admin" || loggedUser.idPatient === patient.idPatient) { %>
+                                    <li>
+                                        <!--CHANGE TEMPLATE-->
+                                        <a href="/patient/edit/<%= patient.idPatient %>">
+                                            <img src="/images/edit_icon.png" alt="Edit" width="30" height="30"
+                                                class="list-actions-icon-edit">
+                                            <span class="list-actions-button-edit"><%= __('list.actions.edit') %></span>
+                                        </a>
+                                    </li>
+                                <% } %>
+                                <% if(loggedUser.role === "admin") { %>
+                                <li>
+                                    <!--CHANGE TEMPLATE-->
+                                    <a href="/patient/delete/<%= patient.idPatient %>">
+                                        <img src="/images/delete_icon.png" alt="Delete" width="30" height="30"
+                                            class="list-actions-icon-delete">
+                                        <span class="list-actions-button-delete"><%= __('list.actions.delete') %></span>
+                                    </a>
+                                </li>
+                                <% } %>
+                            </ul>
+                        </td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+        <% if(loggedUser.role === "admin") { %>
+        <p>
+            <a href="/patient/add" class="button-add"><%= __('patient.list.addNew') %></a>
+        </p>
+        <% } %>
+    </main>
+
+    <%- include(`../../fragments/footer.ejs`) %>

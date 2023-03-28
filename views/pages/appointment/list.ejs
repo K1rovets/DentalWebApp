@@ -1,0 +1,69 @@
+<%- include(`../../fragments/header.ejs`) %>
+
+    <main>
+        <h2><%= __('appointment.list.pageTitle') %></h2>
+        <table class="table-list">
+            <thead>
+                <tr>
+                    <th><%= __('appointment.fields.date') %></th>
+                    <th><%= __('appointment.fields.price') %></th>
+                    <th><%= __('appointment.fields.room') %></th>
+                    <th class="table-hide-1"><%= __('appointment.fields.comment') %></th>
+                    <th><%= __('list.actions.title') %></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (let appointment of appointments) { %>
+                    <tr>
+                        <td>
+                            <%= appointment.date.toLocaleString() %>
+                        </td>
+                        <td>
+                            <%= appointment.price %>
+                        </td>
+                        <td>
+                            <%= appointment.room %>
+                        </td>
+                        <td>
+                            <%= appointment.comment %>
+                        </td>
+                        <td>
+                            <ul class="list-actions">
+                                <li>
+                                    <a href="/appointment/details/<%= appointment.idOperation %>">
+                                        <img src="/images/details_icon.png" alt="Details" width="30" height="30"
+                                            class="list-actions-icon-details">
+                                        <span class="list-actions-button-details"><%= __('list.actions.details') %></span>
+                                    </a>
+                                </li>
+                                <% if(loggedUser.role === "admin") { %>
+                                <li>
+                                    <a href="/appointment/edit/<%= appointment.idOperation %>">
+                                        <img src="/images/edit_icon.png" alt="Edit" width="30" height="30"
+                                            class="list-actions-icon-edit">
+                                        <span class="list-actions-button-edit"><%= __('list.actions.edit') %></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/appointment/delete/<%= appointment.idOperation %>">
+                                        <img src="/images/delete_icon.png" alt="Delete" width="30" height="30"
+                                            class="list-actions-icon-delete">
+                                        <span class="list-actions-button-delete"><%= __('list.actions.delete') %></span>
+                                    </a>
+                                </li>
+                                <% } %>
+                            </ul>
+                        </td>
+                    </tr>
+                <% } %>
+            </tbody>
+
+        </table>
+        <% if(loggedUser.role === "admin") { %>
+        <p>
+            <a href="/appointment/add" class="button-add"><%= __('appointment.list.addNew') %></a>
+        </p>
+        <% } %>
+    </main>
+
+    <%- include(`../../fragments/footer.ejs`) %>

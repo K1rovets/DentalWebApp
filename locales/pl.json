@@ -1,0 +1,175 @@
+{
+	"main-page": {
+		"title": "Strona główna"
+	},
+	"login": {
+		"password": "Hasło",
+		"submit": {
+			"value": "Zaloguj się"
+		},
+		"loggedIn": "Jesteś zalogowany jak",
+		"logout": "Wyloguj się"
+	},
+	"nav": {
+		"main-page": "Strona główna",
+		"patient": "Pacjent",
+		"appoinment": "Spotkanie",
+		"procedure": "Procedura"
+	},
+	"list": {
+		"actions": {
+			"title": "Akcje",
+			"details": "Szczegóły",
+			"edit": "Edytuj",
+			"delete": "Usuń"
+		}
+	},
+	"form": {
+		"actions": {
+			"edit": "Edytuj",
+			"cancel": "Anuluj",
+			"return": "Powrót"
+		}
+	},
+	"validationMessage": {
+		"fieldRequired": "Pole jest wymagane.",
+		"field2_60char": "Pole powinno zawierać od 2 do 60 znaków.",
+		"field7_11char": "Pole powinno zawierać od 7 do 11 znaków.",
+		"fieldValidInsurance": "Pole powinno zawierać aktualny numer ubezpieczenia.",
+		"fieldNoSignInsurance": "The field should not contain any symbols.",
+		"field9_12char": "Pole powinno zawierać od 9 do 12 znaków.",
+		"fieldValidPhone": "Pole powinno zawierać prawidłowy numer telefonu.",
+		"field5_60char": "Pole powinno zawierać od 5 do 60 znaków.",
+		"fieldValidEmail": "Pole powinno zawierać prawidłowy adres e-mail.",
+		"field4_16char": "Hasło powinno zawierać od 4 do 16 znaków.",
+		"field10_60char": "Pole powinno zawierać od 10 do 60 znaków.",
+		"fieldPriceFrom": "Cena musi mieścić się w przedziale 100 - 30000 zł.",
+		"fieldValidNumber": "Pole powinno zawierać liczbę.",
+		"fieldPriceTo": "The Max Price must be bigger than Min Price",
+		"fieldValidDate": "Pole powinno zawierać datę w formacie rrrr-MM-dd hh:mm (np. 2000-01-01 10:00).",
+		"fieldValidHours": "Pole powinno zawierać godziny pracy w godzinach 8:30 - 20:00.",
+		"fieldValidPrice": "Cena musi mieścić się w przedziale od 100 do 33000.",
+		"fieldValidRoom": "Numer pokoju musi być prawidłowy (1-7).",
+		"fieldSummary": "Formularz zawiera błędy."
+	},
+	"joiError": {
+		"fieldRequiredCheck": "Pole jest wymagane.",
+		"fieldLeastCharCheck": "Pole powinno zawierać więcej znaków.",
+		"fieldMostCharCheck": "Pole powinno zawierać mniej znaków.",
+		"fieldEmailCheck": "Pole powinno zawierać prawidłowy adres e-mail.",
+		"fieldNameCheck": "Pole powinno zawierać prawidłowe dane wejściowe.",
+		"fieldPriceCheck": "Pole powinno zawierać cenę w PLN.",
+		"fieldMinPriceCheck": "Pole powinno zawierać większą cenę w PLN.",
+		"fieldMaxPriceCheck": "Pole powinno zawierać mniejszą cenę w PLN.",
+		"fieldGreaterPriceCheck": "Pole powinno zawierać cenę większą niż minimalna.",
+		"fieldLesserPriceCheck": "Pole powinno zawierać cenę większą niż minimalna.",
+		"fieldRoomCheck": "Pole powinno zawierać prawidłowy numer pokoju (1 - 7).",
+		"fieldDateCheck": "Pole powinno zawierać datę w formacie rrrr-MM-dd hh:mm (np. 2000-01-01 10:00)."
+	},
+	"placeholder": {
+		"charLimit": "2-60 znaków",
+		"passCharLimit": "4-16 znaków",
+		"enterNewPass": "Wprowadź nowe hasło"
+	},
+	"selectValue": {
+		"optionDefault": "Wybierz opcję",
+		"optionYes": "Tak",
+		"optionNo": "Nie",
+		"optionPatient": "Wybierz pacjenta",
+		"optionProc": "Wybierz procedurę"
+	},
+	"patient": {
+		"list": {
+			"title": "Lista pacjentów",
+			"pageTitle": "Lista pacjentów",
+			"addNew": "Dodaj nowego pacjenta"
+		},
+		"fields": {
+			"firstName": "Imię",
+			"lastName": "Nazwisko",
+			"insurance": "Ubezpieczenie zdrowotne",
+			"phone": "Numer telefonu",
+			"email": "Email",
+			"password": "Hasło"
+		},
+		"form": {
+			"details": {
+				"tableName": "Szczegóły spotkania",
+				"tableHead1": "Nazwa procedury",
+				"tableHead2": "Data i godzina",
+				"tableHead3": "Cena ostateczna (PLN)",
+				"tableHead4": "Pokój",
+				"tableHead5": "Komentarz",
+				"pageTitle": "Dane pacjenta"
+			},
+			"add": {
+				"pageTitle": "Dodawanie nowego pacjenta",
+				"btnLabel": "Dodaj nowego pacjenta"
+			},
+			"edit": {
+				"pageTitle": "Edycja danych pacjenta",
+				"btnLabel": "Zapisz zmiany"
+			}
+		}
+	},
+	"procedure": {
+		"list": {
+			"title": "Procedury",
+			"pageTitle": "Lista procedur",
+			"addNew": "Dodaj nową procedurę"
+		},
+		"fields": {
+			"name": "Nazwisko",
+			"coverage": "Zakres ubezpieczenia",
+			"minPrice": "Minimalna cena (PLN)",
+			"maxPrice": "Maksymalna cena (PLN)"
+		},
+		"form": {
+			"details": {
+				"tableName": "Szczegóły procedury",
+				"tableHead1": "Imię i nazwisko pacjenta",
+				"tableHead2": "Data i godzina",
+				"tableHead3": "Cena ostateczna (PLN)",
+				"tableHead4": "Pokój",
+				"tableHead5": "Komentarz",
+				"pageTitle": "Szczegóły procedury"
+			},
+			"add": {
+				"pageTitle": "Dodanie nowej procedury",
+				"btnLabel": "Dodaj procedurę"
+			},
+			"edit": {
+				"pageTitle": "Procedura edycji",
+				"btnLabel": "Zapisz zmiany"
+			}
+		}
+	},
+	"appointment": {
+		"list": {
+			"title": "Spotkania",
+			"pageTitle": "Lista spotkań",
+			"addNew": "Dodaj nowe spotkanie"
+		},
+		"fields": {
+			"patient": "Pacjent",
+			"procedure": "Procedura",
+			"date": "Data",
+			"price": "Cena (PLN)",
+			"room": "Pokój",
+			"comment": "Komentarz"
+		},
+		"form": {
+			"details": {
+				"pageTitle": "Szczegóły spotkania"
+			},
+			"add": {
+				"pageTitle": "Dodawanie nowego spotkania",
+				"btnLabel": "Dodaj spotkanie"
+			},
+			"edit": {
+				"pageTitle": "Edycja spotkania",
+				"btnLabel": "Zapisz zmiany"
+			}
+		}
+	}
+}
